@@ -1,0 +1,11 @@
+Third-Party Assets Included:
+
+1. Zenject by Modest Tree, used under the MIT License.
+   All rights reserved to Modest Tree Media Inc.  
+   See included license Zenject-LICENSE.txt file.
+   Link: https://github.com/modesttree/Zenject  
+
+2. DOTween by Demigiant, used under the Artistic License.
+   All rights reserved to Demigiant.
+   See included license DOTween-LICENSE.txt file.
+   Link: https://dotween.demigiant.com/download.php
