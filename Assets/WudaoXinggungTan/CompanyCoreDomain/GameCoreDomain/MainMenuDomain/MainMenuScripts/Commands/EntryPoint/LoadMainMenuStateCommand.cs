@@ -10,7 +10,8 @@ namespace MainMenuScripts.Commands.EntryPoint
     public class LoadMainMenuStateCommand : BaseCommand, ICommandAsync
     {
         private MainMenuInitiatorEnterData mainMenuInitiatorEnterData;
-        private IMainMenuUIController mainMenuUIController;
+        private IMainMenuUIGroupController mainMenuUIGroupController;
+        private IMainMenuUICanvasController mainMenuUICanvasController;
         
         public LoadMainMenuStateCommand SetEnterData(MainMenuInitiatorEnterData mainMenuInitiatorEnterData)
         {
@@ -20,11 +21,14 @@ namespace MainMenuScripts.Commands.EntryPoint
         
         public override void ResolveDependencies()
         {
-            mainMenuUIController = diContainer.Resolve<IMainMenuUIController>();
+            mainMenuUIGroupController = diContainer.Resolve<IMainMenuUIGroupController>();
+            mainMenuUICanvasController = diContainer.Resolve<IMainMenuUICanvasController>();
         }
 
         public Awaitable Execute(CancellationTokenSource cancellationTokenSource)
         {
+            mainMenuUIGroupController.InitEntryPoint();
+            mainMenuUICanvasController.InitEntryPoint();
             return AwaitableUtils.CompletedTask;
         }
     }

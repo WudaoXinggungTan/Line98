@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuScripts.ZenjectInstallers.MainMenuInstaller
   mainMenuUIGroupView: {fileID: 1008684823}
+  mainMenuUICanvasView: {fileID: 519551905}
 --- !u!1 &519551900
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,20 +1,27 @@
-using System.Threading;
 using CompanyCoreScripts.Services.CommandFactoryService.Commands;
-using CompanyCoreScripts.Utils;
-using UnityEngine;
+using MainMenuScripts.MVC.UI.MainMenu;
 
 namespace MainMenuScripts.Commands.EntryPoint
 {
     public class ExitMainMenuStateCommand : BaseCommand, ICommandVoid
     {
+        private IMainMenuUICanvasController mainMenuUICanvasController;
+        
         public override void ResolveDependencies()
         {
-            
+            mainMenuUICanvasController = diContainer.Resolve<IMainMenuUICanvasController>();
         }
 
         public void Execute()
         {
             // Dispose classes that need dispose
+            // For example: RemoveAudioClip from SO
+            // Dispose level from memory
+            // Disable gameplay input (still keep ui input)
+            // call init exit point for lower controllers
+            
+            //For this main menu, prob tell canvas controllers to tell buttons controllers to -= events and delete all template children (if like there is a level grid that clones level buttons)
+            mainMenuUICanvasController.ExitEntryPoint();
         }
     }
 }

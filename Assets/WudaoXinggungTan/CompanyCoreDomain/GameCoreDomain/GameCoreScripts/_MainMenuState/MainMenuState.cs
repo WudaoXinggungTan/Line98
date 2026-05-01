@@ -12,6 +12,7 @@ namespace GameCoreScripts._MainMenuState
 
         public MainMenuState(MainMenuInitiatorEnterData mainMenuInitiatorEnterData, ISceneLoaderService sceneLoaderService) : base(mainMenuInitiatorEnterData, sceneLoaderService)
         {
+            Debug.Log($"THIS IS SPARTAN!! {mainMenuInitiatorEnterData.Number}");
         }
 
         public override async Awaitable LoadState(CancellationTokenSource cancellationTokenSource)
@@ -22,7 +23,7 @@ namespace GameCoreScripts._MainMenuState
 
         public override async Awaitable StartState(CancellationTokenSource cancellationTokenSource)
         {
-            await base.LoadState(cancellationTokenSource);
+            await base.StartState(cancellationTokenSource);
             await SceneLoaderService.StartScene(SceneType.MainMenuScene, EnterData, cancellationTokenSource);
         }
 

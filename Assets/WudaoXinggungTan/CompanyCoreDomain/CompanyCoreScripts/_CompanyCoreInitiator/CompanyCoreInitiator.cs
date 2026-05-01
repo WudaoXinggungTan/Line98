@@ -5,7 +5,6 @@ using Zenject;
 using ProjectPlugins.InputSystem;
 using CompanyCoreScripts._GameCoreEnterData;
 using CompanyCoreScripts.MVC.LoadingScreen;
-using CompanyCoreScripts.Services.LoggerService.Interface;
 using CompanyCoreScripts.Services.LoggerService.StaticClass;
 using CompanyCoreScripts.Services.SceneInitiatorsService;
 using CompanyCoreScripts.Services.SceneLoaderService;

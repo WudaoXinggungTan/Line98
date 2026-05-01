@@ -21,11 +21,12 @@ namespace GameplayScripts._GameplayInitiator
 
         public async Awaitable LoadEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
-            MyLoggerService.Log("LoadEntryPoint");
+            MyLoggerService.Log("LoadEntryPoint For GameplayInitiator");
         }
 
         public Awaitable StartEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
+            MyLoggerService.Log("StartEntryPoint For GameplayInitiator");
             return AwaitableUtils.CompletedTask;
         }
 

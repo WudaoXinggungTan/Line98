@@ -22,7 +22,7 @@ namespace GameCoreScripts._GameplayState
 
         public override async Awaitable StartState(CancellationTokenSource cancellationTokenSource)
         {
-            await base.LoadState(cancellationTokenSource);
+            await base.StartState(cancellationTokenSource);
             await SceneLoaderService.StartScene(SceneType.GameplayScene, EnterData, cancellationTokenSource);
         }
 

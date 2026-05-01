@@ -32,5 +32,11 @@ namespace MainMenuScripts.MVC.UI.MainMenu
         {
             onQuitButtonClicked?.Invoke();
         }
+
+        public void ExitEntryPoint()
+        {
+            startButton.onClick.RemoveListener(OnStartButtonClicked);
+            exitButton.onClick.RemoveListener(OnQuitButtonClicked);
+        } 
     }
 }

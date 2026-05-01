@@ -7,7 +7,10 @@ namespace MainMenuScripts.MVC.UI.MainMenu
     {
         [SerializeField] private MainMenuUICanvasView mainMenuUICanvasView;
 
-        public void InitEntryPoint(Camera uiCamera)
+        public void InitEntryPoint()
+        {
+        }        
+        public void ExitEntryPoint()
         {
         }
     }

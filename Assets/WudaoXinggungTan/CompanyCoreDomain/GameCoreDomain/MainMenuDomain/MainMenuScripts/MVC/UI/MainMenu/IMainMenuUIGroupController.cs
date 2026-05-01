@@ -1,7 +1,8 @@
 namespace MainMenuScripts.MVC.UI.MainMenu
 {
-    public interface IMainMenuUIController
+    public interface IMainMenuUIGroupController
     {
         void InitEntryPoint();
+        void ExitEntryPoint();
     }
 }

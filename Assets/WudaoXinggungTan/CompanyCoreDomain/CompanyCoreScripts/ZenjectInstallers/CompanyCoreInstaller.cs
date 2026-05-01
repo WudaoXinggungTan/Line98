@@ -9,7 +9,6 @@ using CompanyCoreScripts.Services.BroadcastService;
 using CompanyCoreScripts.Services.CommandFactoryService.Factory;
 using CompanyCoreScripts.Services.GameStateService;
 using CompanyCoreScripts.Services.LoggerService;
-using CompanyCoreScripts.Services.LoggerService.StaticClass;
 using CompanyCoreScripts.Services.LoggerService.Interface;
 using CompanyCoreScripts.Services.PlayerPrefDataPersistenceService;
 using CompanyCoreScripts.Services.ResourcesLoaderService;
@@ -37,12 +36,64 @@ namespace CompanyCoreScripts.ZenjectInstallers
 
         public override void InstallBindings()
         {
-            #region Systems
+            BindSystems();
 
-            Container.Bind<InputSystem_Actions>().AsSingle().NonLazy();
+            BindControllers();
+
+            BindAssetsRelatedServices();
+
+            BindSomeServices();
+
+            BindLessImportantServices();
+
+            BindImportantServices();
+        }
+
+        private void BindImportantServices()
+        {
+            #region Important Services (Without these, game won't run)
+
+            Container.Bind<ISceneInitiatorsService>().To<SceneInitiatorsService>().AsSingle().NonLazy();
+            Container.Bind<ISceneLoaderService>().To<SceneLoaderService>().AsSingle();
+            Container.Bind<IGameStateService>().To<GameStateService>().AsSingle().NonLazy();
 
             #endregion
+        }
 
+        private void BindLessImportantServices()
+        {
+            #region Less important Services But Still used a lot in the project
+
+            Container.Bind<ICustomLogger>().To<CustomLogger1>().AsSingle().NonLazy();
+            Container.Bind<IUpdateSubscriptionService>().To<UpdateSubscriptionService>().FromInstance(updateSubscriptionService).AsSingle().NonLazy();
+
+            #endregion
+        }
+
+        private void BindSomeServices()
+        {
+            #region I'm not even sure these Services are needed or not
+
+            Container.Bind<IBroadcastService>().To<BroadcastService>().AsSingle().NonLazy();
+            Container.Bind<ISerializerService>().To<SerializerService>().AsSingle().NonLazy();
+
+            #endregion
+        }
+
+        private void BindAssetsRelatedServices()
+        {
+            #region Audio, Assets, Resources, PlayerPref related Services
+
+            Container.Bind<IAddressablesLoaderService>().To<AddressablesLoaderService>().AsSingle().NonLazy();
+            Container.Bind<IAssetBundleLoaderService>().To<AssetBundleLoaderService>().AsSingle().NonLazy();
+            Container.Bind<IResourcesLoaderService>().To<ResourcesLoaderService>().AsSingle().NonLazy();
+            Container.Bind<IPlayerPrefDataPersistenceService>().To<PlayerPrefDataPersistenceService>().AsSingle().NonLazy();
+
+            #endregion
+        }
+
+        private void BindControllers()
+        {
             #region MVC that control the loading screen, world camera and audio
 
             Container.Bind<IAudioController>().To<AudioController>().AsSingle().NonLazy();
@@ -62,35 +113,13 @@ namespace CompanyCoreScripts.ZenjectInstallers
             Container.Bind<ICommandFactory>().To<CommandFactory>().AsSingle().CopyIntoAllSubContainers().NonLazy();
 
             #endregion
+        }
 
-            #region Audio, Assets, Resources, PlayerPref related Services
+        private void BindSystems()
+        {
+            #region Systems
 
-            Container.Bind<IAddressablesLoaderService>().To<AddressablesLoaderService>().AsSingle().NonLazy();
-            Container.Bind<IAssetBundleLoaderService>().To<AssetBundleLoaderService>().AsSingle().NonLazy();
-            Container.Bind<IResourcesLoaderService>().To<ResourcesLoaderService>().AsSingle().NonLazy();
-            Container.Bind<IPlayerPrefDataPersistenceService>().To<PlayerPrefDataPersistenceService>().AsSingle().NonLazy();
-
-            #endregion
-
-            #region I'm not even sure these Services are needed or not
-
-            Container.Bind<IBroadcastService>().To<BroadcastService>().AsSingle().NonLazy();
-            Container.Bind<ISerializerService>().To<SerializerService>().AsSingle().NonLazy();
-
-            #endregion
-
-            #region Less important Services But Still used a lot in the project
-
-            Container.Bind<ICustomLogger>().To<CustomLogger1>().AsSingle().NonLazy();
-            Container.Bind<IUpdateSubscriptionService>().To<UpdateSubscriptionService>().FromInstance(updateSubscriptionService).AsSingle().NonLazy();
-
-            #endregion
-
-            #region Important Services (Without these, game won't run)
-
-            Container.Bind<ISceneInitiatorsService>().To<SceneInitiatorsService>().AsSingle().NonLazy();
-            Container.Bind<ISceneLoaderService>().To<SceneLoaderService>().AsSingle();
-            Container.Bind<IGameStateService>().To<GameStateService>().AsSingle().NonLazy();
+            Container.Bind<InputSystem_Actions>().AsSingle().NonLazy();
 
             #endregion
         }
