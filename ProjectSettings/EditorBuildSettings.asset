@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/WudaoXinggungTan/CompanyCoreDomain/Scenes/CompanyCoreScene.unity
+    path: Assets/WudaoXinggungTan/CompanyCoreDomain/CompanyCoreScenes/CompanyCoreScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/WudaoXinggungTan/CompanyCoreDomain/GameCoreDomain/GameCoreScenes/GameCoreScene.unity
+    guid: 5540a0b022eea374998c906cc3db9539
+  - enabled: 1
+    path: Assets/WudaoXinggungTan/CompanyCoreDomain/GameCoreDomain/MainMenuDomain/MainMenuScenes/MainMenuScene.unity
+    guid: 28e2e7408950dbc4e8018ac3d9468e0c
+  - enabled: 1
+    path: Assets/WudaoXinggungTan/CompanyCoreDomain/GameCoreDomain/GameplayDomain/GameplayScenes/GameplayScene.unity
+    guid: e7cdd42babbad234c9c40abb0d77fbf5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
