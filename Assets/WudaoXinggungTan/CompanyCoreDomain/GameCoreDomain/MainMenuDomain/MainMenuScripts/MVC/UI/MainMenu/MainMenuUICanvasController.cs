@@ -28,13 +28,12 @@ namespace MainMenuScripts.MVC.UI.MainMenu
 
         private void OnStartButtonClicked()
         {
-            Debug.Log("OnStartButtonClicked");
             gameStateService.SwitchState(gameplayStateFactory.Create(new GameplayInitiatorEnterData()));
         }
 
         private void OnQuitButtonClicked()
         {
-            Debug.Log("OnQuitButtonClicked");
+            Application.Quit();
         }
 
         public void ExitEntryPoint()
