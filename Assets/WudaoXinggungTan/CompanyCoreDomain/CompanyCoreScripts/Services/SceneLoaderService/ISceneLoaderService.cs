@@ -1,7 +1,6 @@
 using System.Threading;
 using UnityEngine;
 using CompanyCoreScripts.Services.SceneInitiatorsService;
-using CompanyCoreScripts.MVC.LoadingScreen;
 
 namespace CompanyCoreScripts.Services.SceneLoaderService
 {

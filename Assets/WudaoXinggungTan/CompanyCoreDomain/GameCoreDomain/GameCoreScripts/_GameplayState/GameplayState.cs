@@ -1,7 +1,7 @@
 using System.Threading;
 using UnityEngine;
-using CompanyCoreScripts.Services.GameStateService;
 using CompanyCoreScripts.Services.SceneLoaderService;
+using GameCoreScripts.Services.GameStateService;
 using GameCoreScripts._GameplayEnterData;
 
 namespace GameCoreScripts._GameplayState

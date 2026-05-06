@@ -78,28 +78,28 @@ namespace CompanyCoreScripts.Editor.DefaultSceneSelector
             EditorSceneManager.playModeStartScene = null;
         }
 
-        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Comany Core Scene &2", false, 3)]
+        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Comany Core Scene &1", false, 3)]
         private static void OpenRootScene()
         {
             EditorApplication.ExitPlaymode();
             EditorSceneManager.OpenScene(COMPANYCORE_SCENE_FILE);
         }
 
-        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Game Core Scene &3", false, 4)]
+        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Game Core Scene &2", false, 4)]
         private static void OpenGameScene()
         {
             EditorApplication.ExitPlaymode();
             EditorSceneManager.OpenScene(GAMECORE_SCENE_FILE);
         }
         
-        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Mainmenu Core Scene &4", false, 5)]
+        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Mainmenu Core Scene &3", false, 5)]
         private static void OpenMainMenuScene()
         {
             EditorApplication.ExitPlaymode();
             EditorSceneManager.OpenScene(MAINMENU_SCENE_FILE);
         }
 
-        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Gameplay Scene &5", false, 6)]
+        [MenuItem("Tools/WudaoXinggungTan/Scene/Open/Gameplay Scene &4", false, 6)]
         private static void OpenGamePlayScene()
         {
             EditorApplication.ExitPlaymode();

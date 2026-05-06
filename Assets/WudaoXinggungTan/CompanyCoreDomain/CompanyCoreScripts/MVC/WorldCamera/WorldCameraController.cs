@@ -15,7 +15,7 @@ namespace CompanyCoreScripts.MVC.WorldCamera
 
         #endregion
 
-        #region Variables
+        #region Dependencies
 
         private Transform followTarget;
 

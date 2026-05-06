@@ -7,7 +7,7 @@ namespace CompanyCoreScripts.Services.SceneInitiatorsService
 {
     public class SceneInitiatorsService : ISceneInitiatorsService
     {
-        #region Variables
+        #region Dependencies
 
         private readonly Dictionary<SceneType, ISceneInitiator> sceneInitiatorsDictionary = new Dictionary<SceneType, ISceneInitiator>();
 

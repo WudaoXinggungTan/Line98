@@ -1,7 +1,7 @@
 using System.Threading;
 using UnityEngine;
-using CompanyCoreScripts.Services.GameStateService;
 using CompanyCoreScripts.Services.SceneLoaderService;
+using GameCoreScripts.Services.GameStateService;
 using GameCoreScripts._MainMenuEnterData;
 
 namespace GameCoreScripts._MainMenuState
@@ -12,7 +12,7 @@ namespace GameCoreScripts._MainMenuState
 
         public MainMenuState(MainMenuInitiatorEnterData mainMenuInitiatorEnterData, ISceneLoaderService sceneLoaderService) : base(mainMenuInitiatorEnterData, sceneLoaderService)
         {
-            Debug.Log($"THIS IS SPARTAN!! {mainMenuInitiatorEnterData.Number}");
+            Debug.Log($"THIS IS SIXTY-NINE!! - {mainMenuInitiatorEnterData.TestNumber}");
         }
 
         public override async Awaitable LoadState(CancellationTokenSource cancellationTokenSource)

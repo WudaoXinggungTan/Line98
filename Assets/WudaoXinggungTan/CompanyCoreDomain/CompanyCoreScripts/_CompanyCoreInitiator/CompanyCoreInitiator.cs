@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 using ProjectPlugins.InputSystem;
 using CompanyCoreScripts._GameCoreEnterData;
-using CompanyCoreScripts.MVC.LoadingScreen;
+using CompanyCoreScripts.MVC.LogoScreen;
 using CompanyCoreScripts.Services.LoggerService.StaticClass;
 using CompanyCoreScripts.Services.SceneInitiatorsService;
 using CompanyCoreScripts.Services.SceneLoaderService;
@@ -16,20 +16,20 @@ namespace CompanyCoreScripts._CompanyCoreInitiator
         #region Dependencies
 
         private InputSystem_Actions inputSystemActions;
-        private ILoadingScreenController loadingScreenController;
         private ISceneLoaderService sceneLoaderService;
+        private ILogoScreenController logoScreenController;
 
         #endregion
 
         #region Constructor
 
         [Inject]
-        private void Constructor(InputSystem_Actions inputSystemActions, ILoadingScreenController loadingScreenController, 
-            ISceneLoaderService sceneLoaderService, ISceneInitiatorsService sceneInitiatorsService)
+        private void Constructor(InputSystem_Actions inputSystemActions, ISceneLoaderService sceneLoaderService, ISceneInitiatorsService sceneInitiatorsService,
+            ILogoScreenController logoScreenController)
         {
             this.inputSystemActions = inputSystemActions;
-            this.loadingScreenController = loadingScreenController;
             this.sceneLoaderService = sceneLoaderService;
+            this.logoScreenController = logoScreenController;
         }
 
         #endregion
@@ -45,15 +45,13 @@ namespace CompanyCoreScripts._CompanyCoreInitiator
         {
             try
             {
-                loadingScreenController.ResetSlider();
-                loadingScreenController.Show();
-
+                await logoScreenController.Show(cancellationTokenSource);
+                
                 UpdateApplicationSettings();
                 InitializeSystems();
                 await LoadGameCoreScene(cancellationTokenSource);
-
-                await loadingScreenController.SetLoadingSlider(1f, cancellationTokenSource);
-                loadingScreenController.Hide();
+                await logoScreenController.Hide(cancellationTokenSource);
+                await StartGameCoreScene(cancellationTokenSource);
             }
             catch (OperationCanceledException)
             {
@@ -74,6 +72,11 @@ namespace CompanyCoreScripts._CompanyCoreInitiator
         private async Awaitable LoadGameCoreScene(CancellationTokenSource cancellationTokenSource)
         {
             await sceneLoaderService.TryLoadScene(SceneType.GameCoreScene, new GameCoreInitiatorEnterData(), cancellationTokenSource);
+        }        
+        
+        private async Awaitable StartGameCoreScene(CancellationTokenSource cancellationTokenSource)
+        {
+            await sceneLoaderService.StartScene(SceneType.GameCoreScene, new GameCoreInitiatorEnterData(), cancellationTokenSource);
         }
 
         private void UpdateApplicationSettings()

@@ -12,11 +12,6 @@ namespace CompanyCoreScripts.Services.SceneLoaderService
         #region Dependencies
 
         private readonly ISceneInitiatorsService sceneInitiatorsService;
-
-        #endregion
-
-        #region Variables
-
         private readonly HashSet<string> loadedScenes = new();
         private readonly HashSet<string> loadingScenes = new();
 

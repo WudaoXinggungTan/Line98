@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58371c49156802a4fb245c912964abd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.GameCoreDomain.Scripts.ZenjectInstallers.GameCoreInstaller
+  loadingScreenView: {fileID: 9145367277173815875}
 --- !u!1 &1080874172
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,9 +230,94 @@ MonoBehaviour:
   - GameCoreScene
   _parentContractNames:
   - CompanyCoreScene
+--- !u!1001 &5380391966260738112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1748261894342883628, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: transitionDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748261894342883628, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: transitionMoveDistance
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843528131731893871, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843528131731893871, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987070457689441753, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_Name
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766175300522768062, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+--- !u!114 &9145367277173815875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1748261894342883628, guid: 17b867f76c57ae24fa1f712d639ecf47, type: 3}
+  m_PrefabInstance: {fileID: 5380391966260738112}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee6019d72587c471b82dce3f91fbcc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.MVC.LoadingScreen.LoadingScreenView
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1080874173}
   - {fileID: 53647498}
+  - {fileID: 5380391966260738112}

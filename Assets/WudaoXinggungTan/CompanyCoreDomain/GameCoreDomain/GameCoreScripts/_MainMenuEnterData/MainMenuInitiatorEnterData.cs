@@ -4,10 +4,10 @@ namespace GameCoreScripts._MainMenuEnterData
 {
     public class MainMenuInitiatorEnterData : IInitiatorEnterData
     {
-        public int Number { get; }
+        public int TestNumber { get; }
         public MainMenuInitiatorEnterData()
         {
-            Number = 5;
+            TestNumber = 69;
         }
     }
 }

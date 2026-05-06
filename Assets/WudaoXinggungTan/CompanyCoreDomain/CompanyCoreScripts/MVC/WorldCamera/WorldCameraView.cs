@@ -8,7 +8,7 @@ namespace CompanyCoreScripts.MVC.WorldCamera
 {
     public class WorldCameraView : MonoBehaviour
     {
-        #region Variables
+        #region Dependencies
 
         [SerializeField] private WorldCameraModelScriptableObject worldCameraModelScriptableObject;
 

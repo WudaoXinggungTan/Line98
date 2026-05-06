@@ -2,15 +2,19 @@ using System.Threading;
 using UnityEngine;
 using CompanyCoreScripts.Utils;
 using CompanyCoreScripts.Services.CommandFactoryService.Commands;
-using CompanyCoreScripts.Services.CommandFactoryService.Factory;
 using GameCoreScripts._MainMenuEnterData;
+using MainMenuScripts.MVC.UI;
+using MainMenuScripts.MVC.UI.MainCanvas;
+using MainMenuScripts.MVC.UI.SettingsCanvas;
 
 namespace MainMenuScripts.Commands.EntryPoint
 {
     public class StartMainMenuStateCommand : BaseCommand, ICommandAsync
     {
-        private ICommandFactory commandFactory;
-        private MainMenuInitiatorEnterData mainMenuInitiatorEnterData;
+        private MainMenuInitiatorEnterData mainMenuInitiatorEnterData;        
+        private IMainMenuUIGroupController mainMenuUIGroupController;
+        private IMainUICanvasController mainUICanvasController;
+        private ISettingsUICanvasController settingsUICanvasController;
         
         public StartMainMenuStateCommand SetEnterData(MainMenuInitiatorEnterData mainMenuInitiatorEnterData)
         {
@@ -20,11 +24,16 @@ namespace MainMenuScripts.Commands.EntryPoint
         
         public override void ResolveDependencies()
         {
-            commandFactory = diContainer.Resolve<ICommandFactory>();
+            mainMenuUIGroupController = diContainer.Resolve<IMainMenuUIGroupController>();
+            mainUICanvasController = diContainer.Resolve<IMainUICanvasController>();
+            settingsUICanvasController = diContainer.Resolve<ISettingsUICanvasController>();
         }
         
         public Awaitable Execute(CancellationTokenSource cancellationTokenSource)
         {
+            mainMenuUIGroupController.StartEntryPoint();
+            mainUICanvasController.StartEntryPoint();
+            settingsUICanvasController.StartEntryPoint();
             return AwaitableUtils.CompletedTask;
         }
     }

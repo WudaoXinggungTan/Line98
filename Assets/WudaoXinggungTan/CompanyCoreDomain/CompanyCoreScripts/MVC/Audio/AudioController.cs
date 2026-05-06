@@ -14,7 +14,7 @@ namespace CompanyCoreScripts.MVC.Audio
 
         #endregion
 
-        #region Variables
+        #region Depedencies
 
         private readonly List<AudioClipsScriptableObject> audioClipsScriptableObjects = new();
 

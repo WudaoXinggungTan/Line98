@@ -3,7 +3,9 @@ using UnityEngine;
 using CompanyCoreScripts.Services.CommandFactoryService.Commands;
 using CompanyCoreScripts.Utils;
 using GameCoreScripts._MainMenuEnterData;
-using MainMenuScripts.MVC.UI.MainMenu;
+using MainMenuScripts.MVC.UI;
+using MainMenuScripts.MVC.UI.MainCanvas;
+using MainMenuScripts.MVC.UI.SettingsCanvas;
 
 namespace MainMenuScripts.Commands.EntryPoint
 {
@@ -11,7 +13,8 @@ namespace MainMenuScripts.Commands.EntryPoint
     {
         private MainMenuInitiatorEnterData mainMenuInitiatorEnterData;
         private IMainMenuUIGroupController mainMenuUIGroupController;
-        private IMainMenuUICanvasController mainMenuUICanvasController;
+        private IMainUICanvasController mainUICanvasController;
+        private ISettingsUICanvasController settingsUICanvasController;
         
         public LoadMainMenuStateCommand SetEnterData(MainMenuInitiatorEnterData mainMenuInitiatorEnterData)
         {
@@ -22,13 +25,15 @@ namespace MainMenuScripts.Commands.EntryPoint
         public override void ResolveDependencies()
         {
             mainMenuUIGroupController = diContainer.Resolve<IMainMenuUIGroupController>();
-            mainMenuUICanvasController = diContainer.Resolve<IMainMenuUICanvasController>();
+            mainUICanvasController = diContainer.Resolve<IMainUICanvasController>();
+            settingsUICanvasController = diContainer.Resolve<ISettingsUICanvasController>();
         }
 
         public Awaitable Execute(CancellationTokenSource cancellationTokenSource)
         {
             mainMenuUIGroupController.InitEntryPoint();
-            mainMenuUICanvasController.InitEntryPoint();
+            mainUICanvasController.InitEntryPoint();
+            settingsUICanvasController.InitEntryPoint();
             return AwaitableUtils.CompletedTask;
         }
     }
