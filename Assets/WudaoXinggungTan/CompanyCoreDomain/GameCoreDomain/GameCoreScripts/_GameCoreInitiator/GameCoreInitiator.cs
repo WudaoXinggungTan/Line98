@@ -39,22 +39,15 @@ namespace GameCoreScripts._GameCoreInitiator
         public Awaitable LoadEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
             var enterData = (GameCoreInitiatorEnterData)enterDataObject; // kept for future use
-            
-            loadingScreenController.ResetSlider();
+
+            loadingScreenController.InitEntryPoint();
             return AwaitableUtils.CompletedTask;
         }
 
         public async Awaitable StartEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
             var enterData = (GameCoreInitiatorEnterData)enterDataObject; // kept for future use
-            
-            await loadingScreenController.Show(cancellationTokenSource);
-            await loadingScreenController.SetLoadingSlider(0.5f, cancellationTokenSource);
-            
             await gameStateService.EnterInitialGameState(mainMenuStateFactory.Create(new MainMenuInitiatorEnterData()), cancellationTokenSource);
-            
-            await loadingScreenController.SetLoadingSlider(1f, cancellationTokenSource);
-            loadingScreenController.Hide();
         }
 
         public Awaitable InitExitPoint(CancellationTokenSource cancellationTokenSource)

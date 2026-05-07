@@ -45,11 +45,12 @@ namespace CompanyCoreScripts._CompanyCoreInitiator
         {
             try
             {
-                await logoScreenController.Show(cancellationTokenSource);
-                
                 UpdateApplicationSettings();
                 InitializeSystems();
-                await LoadGameCoreScene(cancellationTokenSource);
+                
+                _ = LoadGameCoreScene(cancellationTokenSource);
+                
+                await logoScreenController.Show(cancellationTokenSource);
                 await logoScreenController.Hide(cancellationTokenSource);
                 await StartGameCoreScene(cancellationTokenSource);
             }

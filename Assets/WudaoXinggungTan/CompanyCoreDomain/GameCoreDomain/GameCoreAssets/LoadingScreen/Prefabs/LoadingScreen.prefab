@@ -45,11 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6019d72587c471b82dce3f91fbcc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.MVC.LoadingScreen.LoadingScreenView
-  loadingSlider: {fileID: 7091397323916159003}
   loadingCanvas: {fileID: 3951455788359966022}
+  loadingSliderArray:
+  - {fileID: 2680179766123861120}
+  - {fileID: 3685749180514141380}
+  - {fileID: 454647121339726796}
+  - {fileID: 3515618875115129919}
   transitionImage: {fileID: 7376659365670388542}
-  transitionMoveDistance: 1080
-  transitionDuration: 0.5
+  transitionMoveDistance: 1920
+  transitionDuration: 2
 --- !u!1001 &8467231177286003733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,19 +146,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7787888093313303162, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7787888093313303162, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+--- !u!114 &454647121339726796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8344781711810566105, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+  m_PrefabInstance: {fileID: 8467231177286003733}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f91e3a1d31e4bf295ddcb5e457b097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.Helpers.UIHelpers.AnimatedSliderView
+--- !u!114 &2680179766123861120 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5814231407521577109, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+  m_PrefabInstance: {fileID: 8467231177286003733}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f91e3a1d31e4bf295ddcb5e457b097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.Helpers.UIHelpers.AnimatedSliderView
+--- !u!114 &3515618875115129919 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4992338427637391402, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+  m_PrefabInstance: {fileID: 8467231177286003733}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f91e3a1d31e4bf295ddcb5e457b097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.Helpers.UIHelpers.AnimatedSliderView
+--- !u!114 &3685749180514141380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5091263024250300625, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+  m_PrefabInstance: {fileID: 8467231177286003733}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f91e3a1d31e4bf295ddcb5e457b097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.Helpers.UIHelpers.AnimatedSliderView
 --- !u!223 &3951455788359966022 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 4852560421991084371, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
@@ -165,24 +205,13 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3382861805692423907, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
   m_PrefabInstance: {fileID: 8467231177286003733}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7091397323916159003 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1722646303673091086, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
-  m_PrefabInstance: {fileID: 8467231177286003733}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5f91e3a1d31e4bf295ddcb5e457b097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CompanyCoreAssembly::WudaoXinggungTan.CompanyCoreDomain.Scripts.Helpers.UIHelpers.AnimatedSliderView
 --- !u!114 &7376659365670388542 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1431737281960029995, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
   m_PrefabInstance: {fileID: 8467231177286003733}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

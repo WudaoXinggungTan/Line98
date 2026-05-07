@@ -43,18 +43,16 @@ namespace GameCoreScripts.Services.GameStateService
                     return;
                 }
 
-                await loadingScreenController.Show(cancellationTokenSource);
-
-                await currentGameState.ExitState(cancellationTokenSource);
-
+                loadingScreenController.Show();
                 _ = loadingScreenController.SetLoadingSlider(0.5f, cancellationTokenSource);
 
+                await currentGameState.ExitState(cancellationTokenSource);
                 currentGameState = newState;
                 await currentGameState.LoadState(cancellationTokenSource);
 
                 await loadingScreenController.SetLoadingSlider(1, cancellationTokenSource);
                 loadingScreenController.Hide();
-
+                
                 await currentGameState.StartState(cancellationTokenSource);
             }
             catch (OperationCanceledException)
@@ -80,7 +78,15 @@ namespace GameCoreScripts.Services.GameStateService
         public async Awaitable EnterInitialGameState(IGameState initialState, CancellationTokenSource cancellationTokenSource)
         {
             currentGameState = initialState;
+
+            loadingScreenController.Show();
+            await loadingScreenController.ShowTransition(cancellationTokenSource);
+            _ = loadingScreenController.SetLoadingSlider(0.5f, cancellationTokenSource);
             await currentGameState.LoadState(cancellationTokenSource);
+            
+            await loadingScreenController.SetLoadingSlider(1, cancellationTokenSource);
+            loadingScreenController.Hide();
+            
             await currentGameState.StartState(cancellationTokenSource);
         }
 

@@ -28,7 +28,7 @@ namespace CompanyCoreScripts.MVC.LogoScreen
         public async Awaitable Show(CancellationTokenSource cancellationTokenSource)
         {
             logoCanvas.enabled = true;
-
+            logoBackgroundTween?.Kill();
             await SequenceLogoTextAnimations(cancellationTokenSource);
             logoBackgroundTween = logoBackground.DOFade(1f, logoBackgroundTweenDuration);
             await logoBackgroundTween.WithCancellationSafe(cancellationToken: cancellationTokenSource.Token);
@@ -46,6 +46,7 @@ namespace CompanyCoreScripts.MVC.LogoScreen
         public void Hide()
         {
             logoCanvas.enabled = false;
+            logoBackgroundTween?.Kill();
         }
 
         #endregion

@@ -1,8 +1,8 @@
 using System.Threading;
 using UnityEngine;
+using CompanyCoreScripts.MVC.UICamera;
 using CompanyCoreScripts.Services.LoggerService;
 using CompanyCoreScripts.Services.LoggerService.StaticClass;
-using CompanyCoreScripts.Utils;
 
 namespace GameCoreScripts.MVC.LoadingScreen
 {
@@ -11,13 +11,16 @@ namespace GameCoreScripts.MVC.LoadingScreen
         #region Dependency
 
         private readonly LoadingScreenView loadingScreenView;
+        private readonly IUICameraController uiCameraController;
+
 
         #endregion
 
         #region Constructor
 
-        public LoadingScreenController(LoadingScreenView loadingScreenView)
+        public LoadingScreenController(IUICameraController uiCameraController, LoadingScreenView loadingScreenView)
         {
+            this.uiCameraController = uiCameraController;
             this.loadingScreenView = loadingScreenView;
         }
 
@@ -25,11 +28,31 @@ namespace GameCoreScripts.MVC.LoadingScreen
 
         #region Public Methods
 
-        public async Awaitable Show(CancellationTokenSource cancellationTokenSource)
+        public void InitEntryPoint()
+        {
+            loadingScreenView.InitEntryPoint(uiCameraController.UICamera);
+        }
+        
+        public void StartEntryPoint()
+        {
+            loadingScreenView.StartEntryPoint();
+        }
+
+        public void InitExitPoint()
+        {
+            loadingScreenView.InitExitPoint();
+        }
+
+        public async Awaitable ShowTransition(CancellationTokenSource cancellationTokenSource)
+        {
+            await loadingScreenView.ShowTransition(cancellationTokenSource);
+        }
+
+        public void Show()
         {
             MyLoggerService.LogTopic("Show loading screen", LogTopicType.LoadingScreen);
             loadingScreenView.ResetSlider();
-            await loadingScreenView.Show(cancellationTokenSource);
+            loadingScreenView.Show();
         }
 
         public void Hide()

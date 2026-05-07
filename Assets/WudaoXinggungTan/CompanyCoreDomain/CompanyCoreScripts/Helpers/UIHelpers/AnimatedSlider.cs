@@ -8,11 +8,16 @@ namespace CompanyCoreScripts.Helpers.UIHelpers
 {
     public class AnimatedSlider : MonoBehaviour
     {
+        #region Dependencies
+
         [SerializeField] private Slider slider;
         [SerializeField] private float animationDuration = 0.5f;
         [SerializeField] private Ease animationEase = Ease.OutQuad;
-
         private Tween currentAnimationTween;
+
+        #endregion
+
+        #region Public Methods
 
         public async Awaitable AnimateSliderTo(float targetValueBetween0To1, CancellationTokenSource cancellationTokenSource)
         {
@@ -26,5 +31,9 @@ namespace CompanyCoreScripts.Helpers.UIHelpers
             currentAnimationTween?.Kill();
             slider.value = 0;
         }
+
+        public Slider GetSlider() => slider;
+
+        #endregion
     }
 }

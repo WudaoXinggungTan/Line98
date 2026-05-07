@@ -2,8 +2,8 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
 {
     public interface IMainUICanvasController
     {
-        void InitEntryPoint();
-        void StartEntryPoint();
-        void InitExitPoint();
+        public void InitEntryPoint();
+        public void StartEntryPoint();
+        public void InitExitPoint();
     }
 }

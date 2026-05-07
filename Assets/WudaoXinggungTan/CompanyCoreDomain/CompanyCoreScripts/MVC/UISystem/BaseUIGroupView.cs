@@ -88,7 +88,7 @@ namespace CompanyCoreScripts.MVC.UISystem
         {
             foreach (BaseUICanvasView canvasElement in canvasViewArray)
             {
-                canvasElement.gameObject.SetActive(true);
+                canvasElement.enabled = true;
             }
         }
 
@@ -96,7 +96,7 @@ namespace CompanyCoreScripts.MVC.UISystem
         {
             foreach (var canvasElement in canvasViewArray)
             {
-                canvasElement.gameObject.SetActive(false);
+                canvasElement.enabled = false;
             }
         }
 
