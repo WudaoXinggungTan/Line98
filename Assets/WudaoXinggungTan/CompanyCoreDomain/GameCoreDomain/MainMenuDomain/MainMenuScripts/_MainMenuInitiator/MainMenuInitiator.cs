@@ -13,8 +13,14 @@ namespace MainMenuScripts._MainMenuInitiator
     {
         public SceneType SceneType => SceneType.MainMenuScene;
 
+        #region Dependencies
+
         private readonly ISceneInitiatorsService sceneInitiatorsService;
         private readonly ICommandFactory commandFactory;
+
+        #endregion
+
+        #region Constructor
 
         public MainMenuInitiator(ISceneInitiatorsService sceneInitiatorsService, ICommandFactory commandFactory)
         {
@@ -23,7 +29,11 @@ namespace MainMenuScripts._MainMenuInitiator
 
             this.commandFactory = commandFactory;
         }
-        
+
+        #endregion
+
+        #region Public Methods
+
         public async Awaitable LoadEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
             MainMenuInitiatorEnterData mainMenuInitiatorEnterData = (MainMenuInitiatorEnterData)enterDataObject;
@@ -42,5 +52,7 @@ namespace MainMenuScripts._MainMenuInitiator
             commandFactory.CreateCommandVoid<ExitMainMenuStateCommand>().Execute();
             return AwaitableUtils.CompletedTask;
         }
+
+        #endregion
     }
 }

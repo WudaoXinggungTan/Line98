@@ -17,7 +17,6 @@ namespace GameCoreScripts.MVC.LoadingScreen
         [SerializeField] private AnimatedSlider[] loadingSliderArray;
 
         [SerializeField] private Image transitionImage;
-        [SerializeField] private float transitionMoveDistance = 500f;
         [SerializeField] private float transitionDuration = 1.0f;
 
         private Tween transitionTween;
@@ -42,9 +41,10 @@ namespace GameCoreScripts.MVC.LoadingScreen
 
         public async Awaitable ShowTransition(CancellationTokenSource cancellationTokenSource)
         {
+            float heightDistance = ((RectTransform)loadingCanvas.transform).rect.height;
             transitionImage.enabled = true;
             transitionTween?.Kill();
-            transitionTween = transitionImage.rectTransform.DOAnchorPosY(transitionMoveDistance, transitionDuration)
+            transitionTween = transitionImage.rectTransform.DOAnchorPosY(heightDistance, transitionDuration)
                 .SetRelative(true)
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() =>

@@ -17,6 +17,8 @@ namespace GameCoreScripts._GameCoreInitiator
     {
         public SceneType SceneType => SceneType.GameCoreScene;
 
+        #region Dependencies
+
         private readonly ISceneInitiatorsService sceneInitiatorsService;
         private readonly IGameStateService gameStateService;
         private readonly ILoadingScreenController loadingScreenController;
@@ -24,6 +26,9 @@ namespace GameCoreScripts._GameCoreInitiator
         private readonly MainMenuStateFactory mainMenuStateFactory;
         private readonly GameplayStateFactory gameplayStateFactory; // For future uses
 
+        #endregion
+
+        #region Constructor
 
         public GameCoreInitiator(ISceneInitiatorsService sceneInitiatorsService, IGameStateService gameStateService, ILoadingScreenController loadingScreenController, MainMenuStateFactory mainMenuStateFactory, GameplayStateFactory gameplayStateFactory)
         {
@@ -35,6 +40,10 @@ namespace GameCoreScripts._GameCoreInitiator
             this.mainMenuStateFactory = mainMenuStateFactory;
             this.gameplayStateFactory = gameplayStateFactory;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public Awaitable LoadEntryPoint(IInitiatorEnterData enterDataObject, CancellationTokenSource cancellationTokenSource)
         {
@@ -55,5 +64,7 @@ namespace GameCoreScripts._GameCoreInitiator
             sceneInitiatorsService.UnregisterInitiator(this);
             return AwaitableUtils.CompletedTask;
         }
+
+        #endregion
     }
 }

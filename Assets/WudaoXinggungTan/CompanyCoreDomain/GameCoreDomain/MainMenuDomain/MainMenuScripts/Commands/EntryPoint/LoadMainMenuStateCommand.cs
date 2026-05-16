@@ -11,17 +11,27 @@ namespace MainMenuScripts.Commands.EntryPoint
 {
     public class LoadMainMenuStateCommand : BaseCommand, ICommandAsync
     {
+        #region Dependencies
+
         private MainMenuInitiatorEnterData mainMenuInitiatorEnterData;
         private IMainMenuUIGroupController mainMenuUIGroupController;
         private IMainUICanvasController mainUICanvasController;
         private ISettingsUICanvasController settingsUICanvasController;
-        
+
+        #endregion
+
+        #region Constructor
+
         public LoadMainMenuStateCommand SetEnterData(MainMenuInitiatorEnterData mainMenuInitiatorEnterData)
         {
             this.mainMenuInitiatorEnterData = mainMenuInitiatorEnterData;
             return this;
         }
-        
+
+        #endregion
+
+        #region Public Methods
+
         public override void ResolveDependencies()
         {
             mainMenuUIGroupController = diContainer.Resolve<IMainMenuUIGroupController>();
@@ -36,5 +46,7 @@ namespace MainMenuScripts.Commands.EntryPoint
             settingsUICanvasController.InitEntryPoint();
             return AwaitableUtils.CompletedTask;
         }
+
+        #endregion
     }
 }

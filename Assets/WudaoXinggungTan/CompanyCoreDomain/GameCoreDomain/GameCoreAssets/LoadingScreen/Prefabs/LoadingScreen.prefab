@@ -52,7 +52,6 @@ MonoBehaviour:
   - {fileID: 454647121339726796}
   - {fileID: 3515618875115129919}
   transitionImage: {fileID: 7376659365670388542}
-  transitionMoveDistance: 1920
   transitionDuration: 2
 --- !u!1001 &8467231177286003733
 PrefabInstance:
@@ -142,9 +141,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4837742551651718465, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837742551651718465, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118652958601220913, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118652958601220913, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694810016009062711, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694810016009062711, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7631029406228122213, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
       propertyPath: m_Name
       value: LoadingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7694752397066316511, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7694752397066316511, guid: b9c088c79113bc94aa6f6ae93a052def, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

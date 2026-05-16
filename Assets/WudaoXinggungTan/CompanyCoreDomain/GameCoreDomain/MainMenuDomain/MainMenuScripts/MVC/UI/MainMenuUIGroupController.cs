@@ -6,7 +6,7 @@ namespace MainMenuScripts.MVC.UI
     {
         #region Dependencies
 
-        public MainMenuUIGroupView MainMenuUIGroupView { get; }
+        private readonly MainMenuUIGroupView mainMenuUIGroupView;
 
         #endregion
 
@@ -14,7 +14,7 @@ namespace MainMenuScripts.MVC.UI
 
         public MainMenuUIGroupController(MainMenuUIGroupView mainMenuUIGroupView) : base(mainMenuUIGroupView)
         {
-            MainMenuUIGroupView = mainMenuUIGroupView;
+            this.mainMenuUIGroupView = mainMenuUIGroupView;
         }
 
         #endregion
@@ -38,12 +38,12 @@ namespace MainMenuScripts.MVC.UI
 
         public void OpenMainCanvas()
         {
-            MainMenuUIGroupView.SwitchCanvas(MainMenuUIGroupView.MainUICanvasView);
+            mainMenuUIGroupView.SwitchCanvas(mainMenuUIGroupView.MainUICanvasView);
         }
 
         public void OpenSettingsCanvas()
         {
-            MainMenuUIGroupView.SwitchCanvas(MainMenuUIGroupView.SettingsUICanvasView);
+            mainMenuUIGroupView.SwitchCanvas(mainMenuUIGroupView.SettingsUICanvasView);
         }
 
         #endregion

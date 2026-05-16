@@ -5,8 +5,14 @@ namespace MainMenuScripts.Commands.EntryPoint
 {
     public class ExitMainMenuStateCommand : BaseCommand, ICommandVoid
     {
+        #region Dependencies
+
         private IMainUICanvasController mainUICanvasController;
-        
+
+        #endregion
+
+        #region Public Methods
+
         public override void ResolveDependencies()
         {
             mainUICanvasController = diContainer.Resolve<IMainUICanvasController>();
@@ -19,9 +25,11 @@ namespace MainMenuScripts.Commands.EntryPoint
             // Dispose level from memory
             // Disable gameplay input (still keep ui input)
             // call init exit point for lower controllers
-            
+
             //For this main menu, prob tell canvas controllers to tell buttons controllers to -= events and delete all template children (if like there is a level grid that clones level buttons)
             mainUICanvasController.InitExitPoint();
         }
+
+        #endregion
     }
 }

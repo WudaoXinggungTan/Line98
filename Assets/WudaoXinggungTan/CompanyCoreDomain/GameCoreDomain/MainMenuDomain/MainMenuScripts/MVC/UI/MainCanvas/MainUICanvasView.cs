@@ -2,6 +2,7 @@ using System;
 using CompanyCoreScripts.MVC.UISystem;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace MainMenuScripts.MVC.UI.MainCanvas
 {
@@ -12,6 +13,9 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
         [SerializeField] private Button startButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] private RectTransform buttonsPanel;
+        [SerializeField] private RectTransform textPanel;
+
         private Canvas screenCanvas;
 
         #endregion
@@ -31,7 +35,7 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
             base.InitEntryPoint();
             screenCanvas = GetComponent<Canvas>();
             screenCanvas.worldCamera = uiCamera;
-            
+
             startButton.onClick.AddListener(OnStartButtonClicked);
             settingsButton.onClick.AddListener(OnSettingsButtonClicked);
             exitButton.onClick.AddListener(OnQuitButtonClicked);
@@ -43,7 +47,14 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
 
         public void StartEntryPoint()
         {
-            
+            // Let's do some DOTween animations~
+            buttonsPanel.DOAnchorPosX(buttonsPanel.anchoredPosition.x, 1f)
+                .From(new Vector2(buttonsPanel.anchoredPosition.x + 540, buttonsPanel.anchoredPosition.y))
+                .SetEase(Ease.OutBack);
+
+            textPanel.DOAnchorPosY(textPanel.anchoredPosition.y, 1f)
+                .From(new Vector2(textPanel.anchoredPosition.x, textPanel.anchoredPosition.y + 960))
+                .SetEase(Ease.OutBack);
         }
 
         public void InitExitPoint()
