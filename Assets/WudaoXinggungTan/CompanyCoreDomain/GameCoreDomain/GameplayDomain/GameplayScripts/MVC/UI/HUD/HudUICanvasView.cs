@@ -21,12 +21,24 @@ namespace GameplayScripts.MVC.UI.HUD
             screenCanvas.worldCamera = uiCamera;
         }
 
-        public void StartEntryPoint()
+        public override void StartEntryPoint()
         {
+            base.StartEntryPoint();
         }
 
-        public void InitExitPoint()
+        public override void InitExitPoint()
         {
+            base.InitExitPoint();
+        }
+
+        public override void StartCanvas()
+        {
+            base.StartCanvas();
+        }
+
+        public override void CloseCanvas()
+        {
+            base.CloseCanvas();
         }
 
         #endregion

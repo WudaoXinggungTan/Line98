@@ -17,6 +17,7 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
         [SerializeField] private RectTransform textPanel;
 
         private Canvas screenCanvas;
+        private CanvasGroup screenCanvasGroup;
 
         #endregion
 
@@ -34,6 +35,7 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
         {
             base.InitEntryPoint();
             screenCanvas = GetComponent<Canvas>();
+            screenCanvasGroup = GetComponent<CanvasGroup>();
             screenCanvas.worldCamera = uiCamera;
 
             startButton.onClick.AddListener(OnStartButtonClicked);
@@ -45,9 +47,12 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
             this.onQuitButtonClicked = onQuitButtonClicked;
         }
 
-        public void StartEntryPoint()
+        public override void StartEntryPoint()
         {
+            base.StartEntryPoint();
             // Let's do some DOTween animations~
+            screenCanvasGroup.DOFade(1f, 1f).From(0f);
+            
             buttonsPanel.DOAnchorPosX(buttonsPanel.anchoredPosition.x, 1f)
                 .From(new Vector2(buttonsPanel.anchoredPosition.x + 540, buttonsPanel.anchoredPosition.y))
                 .SetEase(Ease.OutBack);
@@ -57,11 +62,22 @@ namespace MainMenuScripts.MVC.UI.MainCanvas
                 .SetEase(Ease.OutBack);
         }
 
-        public void InitExitPoint()
+        public override void InitExitPoint()
         {
+            base.InitExitPoint();
             startButton.onClick.RemoveListener(OnStartButtonClicked);
             settingsButton.onClick.RemoveListener(OnSettingsButtonClicked);
             exitButton.onClick.RemoveListener(OnQuitButtonClicked);
+        }
+
+        public override void StartCanvas()
+        {
+            base.StartCanvas();
+        }
+        
+        public override void CloseCanvas()
+        {
+            base.CloseCanvas();
         }
 
         #endregion

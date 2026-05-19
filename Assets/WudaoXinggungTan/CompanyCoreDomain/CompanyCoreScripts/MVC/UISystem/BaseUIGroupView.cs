@@ -10,7 +10,7 @@ namespace CompanyCoreScripts.MVC.UISystem
         [Header("Main Properties")]
         public BaseUICanvasView startCanvasView;
 
-        private BaseUICanvasView[] canvasViewArray = new BaseUICanvasView[0];
+        private Canvas[] canvasArray = new Canvas[0];
 
         private BaseUICanvasView previousCanvasView;
         public BaseUICanvasView PreviousCanvasView { get { return previousCanvasView; } }
@@ -30,7 +30,7 @@ namespace CompanyCoreScripts.MVC.UISystem
 
         public virtual void InitEntryPoint()
         {
-            canvasViewArray = GetComponentsInChildren<BaseUICanvasView>(true);
+            canvasArray = GetComponentsInChildren<Canvas>(true);
             DisableAllCanvas();
         }
 
@@ -86,17 +86,17 @@ namespace CompanyCoreScripts.MVC.UISystem
 
         private void EnableAllCanvas()
         {
-            foreach (BaseUICanvasView canvasElement in canvasViewArray)
+            foreach (Canvas canvas in canvasArray)
             {
-                canvasElement.enabled = true;
+                canvas.enabled = true;
             }
         }
 
         private void DisableAllCanvas()
         {
-            foreach (var canvasElement in canvasViewArray)
+            foreach (Canvas canvas in canvasArray)
             {
-                canvasElement.enabled = false;
+                canvas.enabled = false;
             }
         }
 

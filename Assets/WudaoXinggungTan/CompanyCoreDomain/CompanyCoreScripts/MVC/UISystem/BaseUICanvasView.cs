@@ -13,8 +13,10 @@ namespace CompanyCoreScripts.MVC.UISystem
 
         private const string SHOW_ANIMATION_STRING = "ShowCanvas";
         private const string HIDE_ANIMATION_STRING = "HideCanvas";
-        
+
         [SerializeField] private Selectable startSelectable;
+
+        private Canvas canvas;
 
         #endregion
 
@@ -27,42 +29,40 @@ namespace CompanyCoreScripts.MVC.UISystem
 
         #region Virtual Methods
 
-        protected virtual void InitEntryPoint()
+        public virtual void InitEntryPoint()
         {
+            canvas = GetComponent<Canvas>();
+        }
+
+        public virtual void StartEntryPoint()
+        {
+        }
+
+        public virtual void InitExitPoint()
+        {
+        }
+
+        public virtual void StartCanvas()
+        {
+            OnCanvasStart();
+            canvas.enabled = true;
             if (startSelectable)
             {
                 EventSystem.current.SetSelectedGameObject(startSelectable.gameObject);
             }
-        }
-        
-        public virtual void StartCanvas()
-        {
-            OnCanvasStart();
-            HandleAnimator(SHOW_ANIMATION_STRING);
+            
         }
 
         public virtual void CloseCanvas()
         {
             OnCanvasClose();
-            HandleAnimator(HIDE_ANIMATION_STRING);
+            canvas.enabled = false;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void HandleAnimator(string aTrigger)
-        {
-            // use DOT Tween to start
-            switch (aTrigger)
-            {
-                case SHOW_ANIMATION_STRING: gameObject.SetActive(true);
-                    break;
-                case HIDE_ANIMATION_STRING: gameObject.SetActive(false);
-                    break;
-            }
-        }
-        
         private void OnCanvasStart()
         {
             onCanvasStart?.Invoke();

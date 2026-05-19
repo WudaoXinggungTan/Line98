@@ -41,13 +41,14 @@ namespace MainMenuScripts.MVC.UI.SettingsCanvas
             this.onBackButtonClicked = onBackButtonClicked;
         }
         
-        public void StartEntryPoint()
+        public new void StartEntryPoint()
         {
-            
+            base.StartEntryPoint();
         }
 
-        public void InitExitPoint()
+        public new void InitExitPoint()
         {
+            base.InitExitPoint();
             musicButton.onClick.RemoveListener(OnMusicButtonClicked);
             sfxButton.onClick.RemoveListener(OnSfxButtonClicked);
             backButton.onClick.RemoveListener(OnBackButtonClicked);
