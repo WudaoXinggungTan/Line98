@@ -2,6 +2,8 @@ using System.Threading;
 using UnityEngine;
 using CompanyCoreScripts.Services.CommandFactoryService.Commands;
 using CompanyCoreScripts.Utils;
+using GameplayScripts.MVC.Gameplay.Ball;
+using GameplayScripts.MVC.Gameplay.Board;
 using GameplayScripts.MVC.UI;
 using GameplayScripts.MVC.UI.HUD;
 using GameCoreScripts._GameplayEnterData;
@@ -15,6 +17,8 @@ namespace GameplayScripts.Commands.EntryPoint
         private GameplayInitiatorEnterData gameplayInitiatorEnterData;
         private IGameplayUIGroupController gameplayUIGroupController;
         private IHudUICanvasController hudUICanvasController;
+        private IBoardController boardController;
+        private IBallController ballController;
 
         #endregion
 
@@ -34,13 +38,17 @@ namespace GameplayScripts.Commands.EntryPoint
         {
             gameplayUIGroupController = diContainer.Resolve<IGameplayUIGroupController>();
             hudUICanvasController = diContainer.Resolve<IHudUICanvasController>();
+            boardController = diContainer.Resolve<IBoardController>();
+            ballController = diContainer.Resolve<IBallController>();
         }
 
         public Awaitable Execute(CancellationTokenSource cancellationTokenSource)
         {
             gameplayUIGroupController.StartEntryPoint();
             hudUICanvasController.StartEntryPoint();
-            return AwaitableUtils.CompletedTask;        
+            boardController.StartEntryPoint();
+            ballController.StartEntryPoint();
+            return AwaitableUtils.CompletedTask;
         }
 
         #endregion
