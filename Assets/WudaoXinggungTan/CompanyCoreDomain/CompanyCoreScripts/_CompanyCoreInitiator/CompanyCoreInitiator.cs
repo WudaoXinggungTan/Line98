@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using UnityEngine;
 using Zenject;
-using CompanyCoreDomain.Plugins.InputSystem;
+using ProjectPlugins.InputSystem;
 using CompanyCoreScripts._GameCoreEnterData;
 using CompanyCoreScripts.MVC.LogoScreen;
 using CompanyCoreScripts.Services.LoggerService.StaticClass;

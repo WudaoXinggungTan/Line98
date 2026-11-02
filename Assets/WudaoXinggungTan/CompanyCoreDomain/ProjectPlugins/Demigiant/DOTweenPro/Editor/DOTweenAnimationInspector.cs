@@ -1,4 +1,4 @@
-ï»¿// Author: Daniele Giardini - http://www.demigiant.com
+// Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2015/03/12 16:03
 
 using System;
@@ -151,17 +151,14 @@ namespace DG.DOTweenEditor
             "Shake/Position", "Shake/Rotation", "Shake/Scale",
             "Camera/Aspect", "Camera/BackgroundColor", "Camera/FieldOfView", "Camera/OrthoSize", "Camera/PixelRect", "Camera/Rect"
         };
-#pragma warning disable UDR0001
         static string[] _animationTypeNoSlashes; // _AnimationType list without slashes in values
         static string[] _datString; // String representation of DOTweenAnimation enum (here for caching reasons)
-#pragma warning restore UDR0001
 
         DOTweenAnimation _src;
         DOTweenSettings _settings;
         bool _runtimeEditMode; // If TRUE allows to change and save stuff at runtime
         bool _refreshRequired; // If TRUE refreshes components data
         int _totComponentsOnSrc; // Used to determine if a Component is added or removed from the source
-        bool _tempTargetInfoRefreshRequired = true; // If TRUE refreshes the extra temporary info (stored only between enable/disable) about the current target
         bool _isLightSrc; // Used to determine if we're tweening a Light, to set the max Fade value to more than 1
 #pragma warning disable 414
         ChooseTargetMode _chooseTargetMode = ChooseTargetMode.None;
@@ -194,7 +191,7 @@ namespace DG.DOTweenEditor
             onCompleteProperty = base.serializedObject.FindProperty("onComplete");
             onRewindProperty = base.serializedObject.FindProperty("onRewind");
             onTweenCreatedProperty = base.serializedObject.FindProperty("onTweenCreated");
-            
+
             // Convert _AnimationType to _animationTypeNoSlashes
             int len = _AnimationType.Length;
             _animationTypeNoSlashes = new string[len];
@@ -225,8 +222,8 @@ namespace DG.DOTweenEditor
             GUILayout.Label(_src.animationType.ToString() + (string.IsNullOrEmpty(_src.id) ? "" : " [" + _src.id + "]"), EditorGUIUtils.sideLogoIconBoldLabelStyle);
             // Up-down buttons
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("â–²", DeGUI.styles.button.toolIco)) UnityEditorInternal.ComponentUtility.MoveComponentUp(_src);
-            if (GUILayout.Button("â–¼", DeGUI.styles.button.toolIco)) UnityEditorInternal.ComponentUtility.MoveComponentDown(_src);
+            if (GUILayout.Button("?", DeGUI.styles.button.toolIco)) UnityEditorInternal.ComponentUtility.MoveComponentUp(_src);
+            if (GUILayout.Button("?", DeGUI.styles.button.toolIco)) UnityEditorInternal.ComponentUtility.MoveComponentDown(_src);
             GUILayout.EndHorizontal();
 
             if (playMode) {
@@ -323,10 +320,7 @@ namespace DG.DOTweenEditor
                         );
                     }
                 bool check = EditorGUI.EndChangeCheck();
-                if (check) {
-                    _refreshRequired = true;
-                    _tempTargetInfoRefreshRequired = true;
-                }
+                if (check) _refreshRequired = true;
             GUILayout.EndHorizontal();
 
             GameObject targetGO = _src.targetIsSelf ? _src.gameObject : _src.targetGO;
@@ -339,7 +333,6 @@ namespace DG.DOTweenEditor
                     GUI.changed = true;
                 }
             } else {
-                if (_tempTargetInfoRefreshRequired) RefreshTempTargetInfo(targetGO);
                 GUILayout.BeginHorizontal();
                 DOTweenAnimation.AnimationType prevAnimType = _src.animationType;
 //                _src.animationType = (DOTweenAnimation.AnimationType)EditorGUILayout.EnumPopup(_src.animationType, EditorGUIUtils.popupButton);
@@ -375,6 +368,7 @@ namespace DG.DOTweenEditor
                         break;
                     case DOTweenAnimation.AnimationType.Color:
                     case DOTweenAnimation.AnimationType.Fade:
+                        _isLightSrc = targetGO.GetComponent<Light>() != null;
                         _src.endValueFloat = 0;
                         break;
                     case DOTweenAnimation.AnimationType.Text:
@@ -645,12 +639,6 @@ namespace DG.DOTweenEditor
             return false;
         }
 
-        void RefreshTempTargetInfo(GameObject targetGO)
-        {
-            _isLightSrc = targetGO.GetComponent<Light>() != null;
-            _tempTargetInfoRefreshRequired = false;
-        }
-
         DOTweenAnimation.AnimationType AnimationToDOTweenAnimationType(string animation)
         {
             if (_datString == null) _datString = Enum.GetNames(typeof(DOTweenAnimation.AnimationType));
@@ -750,23 +738,15 @@ namespace DG.DOTweenEditor
         #endregion
     }
 
-    // â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
-    // â–ˆâ–ˆâ–ˆ INTERNAL CLASSES â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
-    // â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+    // ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+    // ¦¦¦ INTERNAL CLASSES ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+    // ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
 
     [InitializeOnLoad]
     static class Initializer
     {
         static Initializer()
         {
-            DOTweenAnimation.OnReset -= OnReset;
-            DOTweenAnimation.OnReset += OnReset;
-        }
-
-        [RuntimeInitializeOnLoadMethod]
-        static void InitializerRuntime()
-        {
-            DOTweenAnimation.OnReset -= OnReset;
             DOTweenAnimation.OnReset += OnReset;
         }
 

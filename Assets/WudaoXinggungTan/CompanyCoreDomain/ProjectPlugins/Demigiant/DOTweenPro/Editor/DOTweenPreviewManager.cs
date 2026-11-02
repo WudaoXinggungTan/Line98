@@ -1,4 +1,4 @@
-ï»¿// Author: Daniele Giardini - http://www.demigiant.com
+// Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2015/03/12 16:03
 
 using System;
@@ -16,9 +16,7 @@ namespace DG.DOTweenEditor
 {
     public static class DOTweenPreviewManager
     {
-#pragma warning disable UDR0001
         static bool _previewOnlyIfSetToAutoPlay = true;
-#pragma warning restore UDR0001
         static readonly Dictionary<DOTweenAnimation,TweenInfo> _AnimationToTween = new Dictionary<DOTweenAnimation,TweenInfo>();
         static readonly List<DOTweenAnimation> _TmpKeys = new List<DOTweenAnimation>();
 
@@ -30,6 +28,8 @@ namespace DG.DOTweenEditor
         public static bool PreviewGUI(DOTweenAnimation src)
         {
             if (EditorApplication.isPlaying) return false;
+
+            Styles.Init();
 
             bool isPreviewing = _AnimationToTween.Count > 0;
             bool isPreviewingThis = isPreviewing && _AnimationToTween.ContainsKey(src);
@@ -55,18 +55,18 @@ namespace DG.DOTweenEditor
                 isPreviewingThis || src.animationType == DOTweenAnimation.AnimationType.None
                 || !src.isActive || _previewOnlyIfSetToAutoPlay && !src.autoPlay
             );
-            if (GUILayout.Button("â–º Play", Styles.btPreview)) {
+            if (GUILayout.Button("? Play", Styles.btPreview)) {
                 if (!isPreviewing) StartupGlobalPreview();
                 AddAnimationToGlobalPreview(src);
             }
             EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(isPreviewing);
-            if (GUILayout.Button("â–º Play All <i>on GameObject</i>", Styles.btPreview)) {
+            if (GUILayout.Button("? Play All <i>on GameObject</i>", Styles.btPreview)) {
                 if (!isPreviewing) StartupGlobalPreview();
                 DOTweenAnimation[] anims = src.gameObject.GetComponents<DOTweenAnimation>();
                 foreach (DOTweenAnimation anim in anims) AddAnimationToGlobalPreview(anim);
             }
-            if (GUILayout.Button("â–º Play All <i>in Scene</i>", Styles.btPreview)) {
+            if (GUILayout.Button("? Play All <i>in Scene</i>", Styles.btPreview)) {
                 if (!isPreviewing) StartupGlobalPreview();
                 // DOTweenAnimation[] anims = Object.FindObjectsOfType<DOTweenAnimation>(); // OBSOLETE
                 DOTweenAnimation[] anims = DeEditorCompatibilityUtils.FindObjectsOfType<DOTweenAnimation>();
@@ -77,15 +77,15 @@ namespace DG.DOTweenEditor
             // Preview - Stop
             GUILayout.BeginHorizontal();
             EditorGUI.BeginDisabledGroup(!isPreviewingThis);
-            if (GUILayout.Button("â–  Stop", Styles.btPreview)) {
+            if (GUILayout.Button("¦ Stop", Styles.btPreview)) {
                 if (_AnimationToTween.ContainsKey(src)) StopPreview(_AnimationToTween[src].tween);
             }
             EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(!isPreviewing);
-            if (GUILayout.Button("â–  Stop All <i>on GameObject</i>", Styles.btPreview)) {
+            if (GUILayout.Button("¦ Stop All <i>on GameObject</i>", Styles.btPreview)) {
                 StopPreview(src.gameObject);
             }
-            if (GUILayout.Button("â–  Stop All <i>in Scene</i>", Styles.btPreview)) {
+            if (GUILayout.Button("¦ Stop All <i>in Scene</i>", Styles.btPreview)) {
                 StopAllPreviews();
             }
             EditorGUI.EndDisabledGroup();
@@ -144,15 +144,11 @@ namespace DG.DOTweenEditor
         static void StartupGlobalPreview()
         {
             DOTweenEditorPreview.Start();
-#pragma warning disable UDR0001
 #if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5
-            UnityEditor.EditorApplication.playmodeStateChanged -= StopAllPreviews;
             UnityEditor.EditorApplication.playmodeStateChanged += StopAllPreviews;
 #else
-            UnityEditor.EditorApplication.playModeStateChanged -= StopAllPreviews;
             UnityEditor.EditorApplication.playModeStateChanged += StopAllPreviews;
 #endif
-#pragma warning restore UDR0001
 //            EditorApplication.playmodeStateChanged += StopAllPreviews;
         }
 
@@ -192,7 +188,7 @@ namespace DG.DOTweenEditor
                 break;
             }
             if (tInfo == null) {
-                Debug.LogWarning("DOTween Preview â–º Couldn't find tween to stop");
+                Debug.LogWarning("DOTween Preview ? Couldn't find tween to stop");
                 return;
             }
             if (tInfo.isFrom) {
@@ -228,9 +224,9 @@ namespace DG.DOTweenEditor
 
 #endregion
 
-        // â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
-        // â–ˆâ–ˆâ–ˆ INTERNAL CLASSES â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
-        // â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ
+        // ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+        // ¦¦¦ INTERNAL CLASSES ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
+        // ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦
 
         class TweenInfo
         {
@@ -247,12 +243,16 @@ namespace DG.DOTweenEditor
 
         static class Styles
         {
-#pragma warning disable UDR0001
-            public static GUIStyle previewBox, previewLabel, btOption, btPreview, previewStatusLabel;
-#pragma warning restore UDR0001
+            static bool _initialized;
 
-            static Styles()
+            public static GUIStyle previewBox, previewLabel, btOption, btPreview, previewStatusLabel;
+
+            public static void Init()
             {
+                if (_initialized) return;
+
+                _initialized = true;
+
                 previewBox = new GUIStyle(GUI.skin.box).Clone().Padding(1, 1, 0, 3)
                     .Background(DeStylePalette.squareBorderCurved_darkBorders).Border(7, 7, 7, 7);
                 previewLabel = new GUIStyle(GUI.skin.label).Clone(10, FontStyle.Bold).Padding(1, 0, 3, 0).Margin(3, 6, 0, 0).StretchWidth(false);

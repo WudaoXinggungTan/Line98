@@ -6,7 +6,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 32416
   packageName: DOTween Pro
-  packageVersion: 1.0.435
-  assetPath: Assets/WudaoXinggungTan/CompanyCoreDomain/ProjectPlugins/Demigiant/DOTweenPro
-    Examples/DOTweenPath.unity
-  uploadId: 1018844
+  packageVersion: 1.0.410
+  assetPath: Assets/Plugins/Demigiant/DOTweenPro Examples/DOTweenPath.unity
+  uploadId: 862446
