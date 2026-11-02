@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-using ProjectPlugins.InputSystem;
+using CompanyCoreDomain.Plugins.InputSystem;
 using CompanyCoreScripts.MVC.LogoScreen;
 using CompanyCoreScripts.MVC.WorldCamera;
 using CompanyCoreScripts.Services.AddressablesLoader;
