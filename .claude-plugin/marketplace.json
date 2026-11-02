@@ -1,0 +1,11 @@
+{
+  "name": "line98-plugins",
+  "owner": { "name": "Slenderchild" },
+  "plugins": [
+    {
+      "name": "unity",
+      "description": "Unity 6 development skills (Nice Wolf Studio, MIT)",
+      "source": { "source": "github", "repo": "Nice-Wolf-Studio/unity-claude-skills" }
+    }
+  ]
+}

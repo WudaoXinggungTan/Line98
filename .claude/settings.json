@@ -1,0 +1,11 @@
+{
+  "extraKnownMarketplaces": {
+    "line98-plugins": {
+      "source": { "source": "github", "repo": "WudaoXinggungTan/Line98" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "unity@line98-plugins": true
+  }
+}
