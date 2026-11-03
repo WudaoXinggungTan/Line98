@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ivanmurzak.unity.mcp": "file:C:/Users/slenderchild/Downloads/Setups/com.ivanmurzak.unity.mcp-1.6.0.tgz",
+    "com.ivanmurzak.unity.mcp": "1.6.0",
     "com.unity.2d.animation": "15.1.0",
     "com.unity.2d.aseprite": "5.0.3",
     "com.unity.2d.psdimporter": "14.0.3",
@@ -22,7 +22,6 @@
     "com.unity.timeline": "1.8.12",
     "com.unity.ugui": "2.5.0",
     "com.unity.visualscripting": "1.9.12",
-    "extensions.unity.playerprefsex": "file:C:/Users/slenderchild/Downloads/Setups/extensions.unity.playerprefsex-2.1.5.tgz",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.adaptiveperformance": "1.0.0",
     "com.unity.modules.ai": "1.0.0",

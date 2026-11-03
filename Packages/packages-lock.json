@@ -1,14 +1,15 @@
 {
   "dependencies": {
     "com.ivanmurzak.unity.mcp": {
-      "version": "file:com.ivanmurzak.unity.mcp",
+      "version": "1.6.0",
       "depth": 0,
-      "source": "embedded",
+      "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
         "com.unity.modules.uielements": "1.0.0",
         "extensions.unity.playerprefsex": "2.1.5"
-      }
+      },
+      "url": "https://package.openupm.com"
     },
     "com.unity.2d.animation": {
       "version": "15.1.0",
@@ -341,10 +342,11 @@
       "url": "https://packages.unity.com"
     },
     "extensions.unity.playerprefsex": {
-      "version": "file:C:/Users/slenderchild/Downloads/Setups/extensions.unity.playerprefsex-2.1.5.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {}
+      "version": "2.1.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

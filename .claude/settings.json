@@ -1,4 +1,26 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)"
+    ],
+    "deny": [
+      "Edit(**/Library/**)",
+      "Edit(**/Temp/**)",
+      "Edit(**/obj/**)",
+      "Edit(**/Logs/**)",
+      "Edit(**/*.csproj)",
+      "Edit(**/*.sln)",
+      "Write(**/Library/**)",
+      "Write(**/Temp/**)",
+      "Write(**/obj/**)",
+      "Write(**/Logs/**)",
+      "Write(**/*.csproj)",
+      "Write(**/*.sln)"
+    ]
+  },
   "extraKnownMarketplaces": {
     "line98-plugins": {
       "source": { "source": "github", "repo": "WudaoXinggungTan/Line98" },
