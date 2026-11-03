@@ -8,6 +8,8 @@ namespace CompanyCoreScripts.MVC.Audio
         void PlayAudio(AudioClipType audioClipType, AudioChannelType audioChannel, AudioPlayType audioPlayType = AudioPlayType.OneShot);
         Awaitable PlayAudioAsync(AudioClipType audioClipType, AudioChannelType audioChannel, CancellationTokenSource cancellationTokenSource, AudioPlayType audioPlayType = AudioPlayType.OneShot);
         void StopAllAudio();
+        bool IsMuted { get; }
+        void SetMuted(bool isMuted);
         void AddAudioClips(AudioClipsScriptableObject audioClipsScriptableObject);
         void RemoveAudioClips(AudioClipsScriptableObject audioClipsScriptableObject);
     }

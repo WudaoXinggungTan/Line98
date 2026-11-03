@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using CompanyCoreScripts.MVC.UISystem;
 using GameplayScripts.MVC.UI.HUD;
+using GameplayScripts.MVC.UI.Settings;
 
 namespace GameplayScripts.MVC.UI
 {
@@ -10,6 +11,7 @@ namespace GameplayScripts.MVC.UI
         #region Canvas Views
 
         [field: SerializeField] public HudUICanvasView HudUICanvasView { get; private set; }
+        [field: SerializeField] public SettingsUICanvasView SettingsUICanvasView { get; private set; }
         
         #endregion
         

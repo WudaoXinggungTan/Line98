@@ -37,14 +37,15 @@ namespace GameplayScripts.MVC.UI
             base.InitExitPoint();
         }
 
+        // Settings is an overlay: it opens on top of the HUD instead of replacing it (SwitchCanvas would close the HUD and the board)
         public void OpenSettingsCanvas()
         {
-            
-        }        
-        
+            gameplayUIGroupView.SettingsUICanvasView.StartCanvas();
+        }
+
         public void CloseSettingsCanvas()
         {
-            
+            gameplayUIGroupView.SettingsUICanvasView.CloseCanvas();
         }
 
         public void OpenHowToPlayCanvas()

@@ -6,6 +6,7 @@ using GameplayScripts.MVC.Gameplay.Ball;
 using GameplayScripts.MVC.Gameplay.Board;
 using GameplayScripts.MVC.UI;
 using GameplayScripts.MVC.UI.HUD;
+using GameplayScripts.MVC.UI.Settings;
 using GameCoreScripts._GameplayEnterData;
 
 namespace GameplayScripts.Commands.EntryPoint
@@ -17,6 +18,7 @@ namespace GameplayScripts.Commands.EntryPoint
         private GameplayInitiatorEnterData gameplayInitiatorEnterData;
         private IGameplayUIGroupController gameplayUIGroupController;
         private IHudUICanvasController hudUICanvasController;
+        private ISettingsUICanvasController settingsUICanvasController;
         private IBoardController boardController;
         private IBallController ballController;
 
@@ -38,6 +40,7 @@ namespace GameplayScripts.Commands.EntryPoint
         {
             gameplayUIGroupController = diContainer.Resolve<IGameplayUIGroupController>();
             hudUICanvasController = diContainer.Resolve<IHudUICanvasController>();
+            settingsUICanvasController = diContainer.Resolve<ISettingsUICanvasController>();
             boardController = diContainer.Resolve<IBoardController>();
             ballController = diContainer.Resolve<IBallController>();
         }
@@ -46,6 +49,7 @@ namespace GameplayScripts.Commands.EntryPoint
         {
             gameplayUIGroupController.StartEntryPoint();
             hudUICanvasController.StartEntryPoint();
+            settingsUICanvasController.StartEntryPoint();
             boardController.StartEntryPoint();
             ballController.StartEntryPoint();
             return AwaitableUtils.CompletedTask;

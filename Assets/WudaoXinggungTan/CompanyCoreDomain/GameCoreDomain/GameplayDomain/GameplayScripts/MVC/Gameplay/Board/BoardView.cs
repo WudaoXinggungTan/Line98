@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace GameplayScripts.MVC.Gameplay.Board
 {
-    // Lives on BoardArea, a RectTransform stretched over the free space below the top buttons.
-    // Cells are created inside cellsContainer (BoardGrid) and sized so the square board is as wide as the screen's
-    // safe area, while staying inside the area's height.
+    // Lives on BoardArea, a RectTransform stretched over the free space below the top buttons, inside the SafeArea
+    // container (SafeAreaFitter), so it never reaches under a notch or the home indicator.
+    // Cells are created inside cellsContainer (BoardGrid) and sized so the square board is as big as fits the area.
     [RequireComponent(typeof(RectTransform))]
     public class BoardView : MonoBehaviour, IPointerClickHandler
     {
@@ -110,14 +110,9 @@ namespace GameplayScripts.MVC.Gameplay.Board
                 return;
             }
 
-            // Width reaches the edges of the screen's safe area, height stays below the top buttons
-            var safeWidth = GetSafeAreaWidth(out var safeCenterOffsetX);
-            var width = Mathf.Min(area.width, safeWidth);
-
             // Biggest whole-unit cell that still fits in both directions
-            var cellSize = Mathf.Floor(Mathf.Min(width / columns, area.height / rows));
+            var cellSize = Mathf.Floor(Mathf.Min(area.width / columns, area.height / rows));
             cellsContainer.sizeDelta = new Vector2(columns * cellSize, rows * cellSize);
-            cellsContainer.anchoredPosition = new Vector2(safeCenterOffsetX, 0f);
 
             for (var i = 0; i < cells.Count; i++)
             {
@@ -127,21 +122,6 @@ namespace GameplayScripts.MVC.Gameplay.Board
                 cellRect.sizeDelta = new Vector2(cellSize, cellSize);
                 cellRect.anchoredPosition = new Vector2(column * cellSize, -row * cellSize);
             }
-        }
-
-        // Screen.safeArea is in pixels; dividing by the canvas scale factor converts it to canvas units
-        private float GetSafeAreaWidth(out float centerOffsetX)
-        {
-            var scaleFactor = GetComponentInParent<Canvas>().rootCanvas.scaleFactor;
-            if (scaleFactor <= 0f)
-            {
-                centerOffsetX = 0f;
-                return float.MaxValue;
-            }
-
-            var safeArea = Screen.safeArea;
-            centerOffsetX = (safeArea.center.x - Screen.width / 2f) / scaleFactor;
-            return safeArea.width / scaleFactor;
         }
 
         #endregion

@@ -66,6 +66,19 @@ namespace GameplayScripts.MVC.Gameplay.Board
             return emptyCells;
         }
 
+        public BoardModel Clone()
+        {
+            var clone = new BoardModel(Rows, Columns);
+            clone.CopyFrom(this);
+            return clone;
+        }
+
+        // Overwrites this board's cells in place, so everyone holding this BoardModel sees the restored state
+        public void CopyFrom(BoardModel other)
+        {
+            Array.Copy(other.cells, cells, cells.Length);
+        }
+
         public void Clear()
         {
             Array.Clear(cells, 0, cells.Length);

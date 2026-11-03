@@ -3,6 +3,7 @@ using System.Threading;
 using UnityEngine;
 using CompanyCoreScripts.Services.LoggerService;
 using CompanyCoreScripts.Services.LoggerService.StaticClass;
+using CompanyCoreScripts.Services.PlayerPrefDataPersistenceService;
 
 namespace CompanyCoreScripts.MVC.Audio
 {
@@ -10,7 +11,10 @@ namespace CompanyCoreScripts.MVC.Audio
     {
         #region Dependency
 
+        private const string MUTED_KEY = "Audio.Muted";
+
         private AudioView audioView;
+        private readonly IPlayerPrefDataPersistenceService persistenceService;
 
         #endregion
 
@@ -20,12 +24,23 @@ namespace CompanyCoreScripts.MVC.Audio
 
         #endregion
 
+        #region Properties
+
+        public bool IsMuted { get; private set; }
+
+        #endregion
+
         #region Constructor
 
-        public AudioController(AudioView audioView)
+        public AudioController(AudioView audioView, IPlayerPrefDataPersistenceService persistenceService)
         {
             this.audioView = audioView;
+            this.persistenceService = persistenceService;
             this.audioView.CreateAudioSourceDictionary();
+
+            // Mute is remembered between sessions
+            IsMuted = persistenceService.Load(MUTED_KEY, false);
+            this.audioView.SetMuted(IsMuted);
         }
 
         #endregion
@@ -89,6 +104,14 @@ namespace CompanyCoreScripts.MVC.Audio
             {
                 await Awaitable.WaitForSecondsAsync(audioClip.length, cancellationTokenSource.Token);
             }
+        }
+
+        public void SetMuted(bool isMuted)
+        {
+            IsMuted = isMuted;
+            audioView.SetMuted(isMuted);
+            persistenceService.Save(MUTED_KEY, isMuted);
+            MyLoggerService.LogTopic($"Audio muted: {isMuted}", LogTopicType.Audio);
         }
 
         public void StopAllAudio()

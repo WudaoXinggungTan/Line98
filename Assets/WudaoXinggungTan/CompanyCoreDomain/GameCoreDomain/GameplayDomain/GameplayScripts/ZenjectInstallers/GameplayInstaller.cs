@@ -6,6 +6,8 @@ using GameplayScripts.MVC.Gameplay.Ball;
 using GameplayScripts.MVC.Gameplay.Board;
 using GameplayScripts.MVC.UI;
 using GameplayScripts.MVC.UI.HUD;
+using GameplayScripts.MVC.UI.Settings;
+using GameplayScripts.Services.ScoreService;
 
 namespace GameplayScripts.ZenjectInstallers
 {
@@ -17,6 +19,8 @@ namespace GameplayScripts.ZenjectInstallers
 
         [SerializeField] private HudUICanvasView hudUICanvasView;
 
+        [SerializeField] private SettingsUICanvasView settingsUICanvasView;
+
         [SerializeField] private BoardView boardView;
 
         [SerializeField] private BallView ballPrefab;
@@ -25,6 +29,12 @@ namespace GameplayScripts.ZenjectInstallers
 
         public override void InstallBindings()
         {
+            #region Services
+
+            Container.Bind<IScoreService>().To<ScoreService>().AsSingle();
+
+            #endregion
+
             #region Initiator
 
             Container.Bind<IGameplayInitiator>().To<GameplayInitiator>().AsSingle().NonLazy();
@@ -43,6 +53,13 @@ namespace GameplayScripts.ZenjectInstallers
             Container.Bind<IHudUICanvasController>().To<HudUICanvasController>().AsSingle().NonLazy();
             Container.Bind<HudUICanvasView>().FromInstance(hudUICanvasView).AsSingle().NonLazy();
 
+
+            #endregion
+
+            #region Settings Canvas
+
+            Container.Bind<ISettingsUICanvasController>().To<SettingsUICanvasController>().AsSingle().NonLazy();
+            Container.Bind<SettingsUICanvasView>().FromInstance(settingsUICanvasView).AsSingle().NonLazy();
 
             #endregion
 

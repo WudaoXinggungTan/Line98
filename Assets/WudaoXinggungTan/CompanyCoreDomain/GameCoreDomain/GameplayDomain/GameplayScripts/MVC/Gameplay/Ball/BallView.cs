@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using CompanyCoreScripts.Extensions;
 using CompanyCoreScripts.Helpers.ObjectPoolsHelpers;
 
 namespace GameplayScripts.MVC.Gameplay.Ball
@@ -11,8 +14,15 @@ namespace GameplayScripts.MVC.Gameplay.Ball
     {
         #region Constants
 
+        private const float BALL_SIZE_IN_CELL = 0.8f;
+        private const float PREVIEW_SIZE_IN_CELL = 0.3f;
+        private const float GROW_SECONDS = 0.2f;
         private const float SELECTED_SCALE = 1.15f;
         private const float SELECTED_PULSE_SECONDS = 0.35f;
+        private const float MOVE_STEP_SECONDS = 0.05f;
+        private const float BLOCKED_SHAKE_SECONDS = 0.25f;
+        private const float BLOCKED_SHAKE_DISTANCE = 12f;
+        private const int BLOCKED_SHAKE_VIBRATO = 20;
 
         #endregion
 
@@ -25,6 +35,9 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         private Action despawn;
         private Tween selectedTween;
+        private Tween moveTween;
+        private Tween blockedTween;
+        private Tween growTween;
 
         #endregion
 
@@ -41,30 +54,72 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         private void OnDestroy()
         {
-            selectedTween?.Kill();
+            KillTweens();
         }
 
         #endregion
 
         #region Public Methods
 
-        public void Show(BallColorType color, RectTransform cell)
+        // A ball fills 80% of its cell, a preview (next turn's ball) 30%; both follow the cell when the board resizes
+        public void Show(BallColorType color, RectTransform cell, bool isPreview = false)
         {
+            blockedTween?.Kill();
+            growTween?.Kill();
             image.sprite = colorSprites[(int)color - 1];
 
-            // Ball fills 80% of the cell, centred, and follows the cell when the board resizes
+            transform.SetParent(cell, false);
+            SetSizeInCell(isPreview ? PREVIEW_SIZE_IN_CELL : BALL_SIZE_IN_CELL);
+            transform.localScale = Vector3.one;
+        }
+
+        // A preview grows into a full ball where it stands
+        public void GrowToFullSize()
+        {
+            growTween?.Kill();
+            SetSizeInCell(BALL_SIZE_IN_CELL);
+            transform.localScale = Vector3.one * (PREVIEW_SIZE_IN_CELL / BALL_SIZE_IN_CELL);
+            growTween = transform.DOScale(1f, GROW_SECONDS).SetEase(Ease.OutBack);
+        }
+
+        // Walks the ball through each cell of the path, one step at a time. Call Show() afterwards to settle it in the last cell.
+        public async Awaitable MoveAlongPathAsync(IReadOnlyList<RectTransform> pathCells, CancellationToken cancellationToken)
+        {
+            // Each ball lives inside its cell and later cells draw on top of earlier ones, so while moving the ball is
+            // lifted into the cells' parent (BoardGrid) as the last child, keeping its on-screen size and position
             var ballRect = (RectTransform)transform;
-            ballRect.SetParent(cell, false);
-            ballRect.anchorMin = new Vector2(0.1f, 0.1f);
-            ballRect.anchorMax = new Vector2(0.9f, 0.9f);
-            ballRect.offsetMin = Vector2.zero;
-            ballRect.offsetMax = Vector2.zero;
-            ballRect.localScale = Vector3.one;
+            var worldPosition = ballRect.position;
+            var size = ballRect.rect.size;
+            ballRect.SetParent(pathCells[0].parent, true);
+            ballRect.SetAsLastSibling();
+            ballRect.anchorMin = new Vector2(0.5f, 0.5f);
+            ballRect.anchorMax = new Vector2(0.5f, 0.5f);
+            ballRect.sizeDelta = size;
+            ballRect.position = worldPosition;
+
+            var sequence = DOTween.Sequence();
+            foreach (var cell in pathCells)
+            {
+                // Cells pivot on their top-left corner, so aim at the centre of their rect
+                var cellCentre = cell.TransformPoint(cell.rect.center);
+                sequence.Append(ballRect.DOMove(cellCentre, MOVE_STEP_SECONDS).SetEase(Ease.Linear));
+            }
+
+            moveTween = sequence;
+            await sequence.WithCancellationSafe(cancellationToken);
+        }
+
+        // Short sideways shake when the selected ball can't reach the clicked cell
+        public void PlayBlockedFeedback()
+        {
+            blockedTween?.Complete();
+            blockedTween = transform.DOShakePosition(BLOCKED_SHAKE_SECONDS, new Vector3(BLOCKED_SHAKE_DISTANCE, 0f, 0f), BLOCKED_SHAKE_VIBRATO);
         }
 
         // Selected balls pulse in size until deselected
         public void SetSelected(bool isSelected)
         {
+            growTween?.Kill();
             selectedTween?.Kill();
             selectedTween = null;
             transform.localScale = Vector3.one;
@@ -93,7 +148,34 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         public void OnDespawned()
         {
-            SetSelected(false);
+            KillTweens();
+            transform.localScale = Vector3.one;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetSizeInCell(float shareOfCell)
+        {
+            var margin = (1f - shareOfCell) / 2f;
+            var ballRect = (RectTransform)transform;
+            ballRect.anchorMin = new Vector2(margin, margin);
+            ballRect.anchorMax = new Vector2(1f - margin, 1f - margin);
+            ballRect.offsetMin = Vector2.zero;
+            ballRect.offsetMax = Vector2.zero;
+        }
+
+        private void KillTweens()
+        {
+            selectedTween?.Kill();
+            moveTween?.Kill();
+            blockedTween?.Kill();
+            growTween?.Kill();
+            selectedTween = null;
+            moveTween = null;
+            blockedTween = null;
+            growTween = null;
         }
 
         #endregion

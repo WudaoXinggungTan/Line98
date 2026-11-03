@@ -49,6 +49,13 @@ namespace CompanyCoreScripts.MVC.Audio
             }
         }
 
+        public void SetMuted(bool isMuted)
+        {
+            masterAudioSource.mute = isMuted;
+            fxAudioSource.mute = isMuted;
+            musicAudioSource.mute = isMuted;
+        }
+
         public void Stop(AudioChannelType channel)
         {
             if (audioSourceByChannel.TryGetValue(channel, out var source))
