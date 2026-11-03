@@ -90,12 +90,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameplayAssembly::GameplayScripts.MVC.Gameplay.Ball.BallView
   image: {fileID: 5332582439458595693}
   colorSprites:
-  - {fileID: 21300000, guid: a3722cee7be3e0f4aba8c407ed97cc60, type: 3}
-  - {fileID: 21300000, guid: 4f2c7b6d87da48e4080fb3edb56c9f2a, type: 3}
-  - {fileID: 21300000, guid: 6f84d515c3939d14f8342459ec2405dc, type: 3}
-  - {fileID: 21300000, guid: cd32eb4ce7d558a4d83f5d2618220d3c, type: 3}
-  - {fileID: 21300000, guid: c7ca2de2d6795a04d8d52561461954d6, type: 3}
-  - {fileID: 21300000, guid: 58c76a62c72ad0848a8a62cb11b7cb3f, type: 3}
-  - {fileID: 21300000, guid: 19ed477a03cea5d4b9857bdcaf6d2e71, type: 3}
-  - {fileID: 21300000, guid: 43abaecae54c6e041a44806818b0a590, type: 3}
-  - {fileID: 21300000, guid: 28d5ef4cf7b56a4468709bdd16fe24ac, type: 3}
+  - {fileID: 21300000, guid: 482e0413c8c70ac489feb84bb2546d0b, type: 3}
+  - {fileID: 21300000, guid: 6276e61a4c62f6745933176b406feb1b, type: 3}
+  - {fileID: 21300000, guid: 8da22e3cc1c1316488c6088eba1054de, type: 3}
+  - {fileID: 21300000, guid: 903953fd6513a2244b8a3a419cc4e6f8, type: 3}
+  - {fileID: 21300000, guid: 4ec668d75cf4b9247890329a30d56429, type: 3}
+  - {fileID: 21300000, guid: 6e2f0371a1914e64c984192ee42206de, type: 3}
+  - {fileID: 21300000, guid: 518d6287452ebda4e993186fb031234c, type: 3}
+  - {fileID: 21300000, guid: 74f0621209b0e914e81342ccba795345, type: 3}
+  - {fileID: 21300000, guid: 04513b96192454e49b05b89bf1d1f9bd, type: 3}
+  previewSprites:
+  - {fileID: 21300000, guid: 97584edfacc06e4488ebecb7f3b0164f, type: 3}
+  - {fileID: 21300000, guid: 5fc40f722b965244fa455fcc6059d470, type: 3}
+  - {fileID: 21300000, guid: 931f7b3da6270344a8a81472457abcda, type: 3}
+  - {fileID: 21300000, guid: 0b67c12921a801a40a33a3504fac0cfe, type: 3}
+  - {fileID: 21300000, guid: 2c3915c2af3cf484bb7a4d046d8b46ab, type: 3}
+  - {fileID: 21300000, guid: e7c0ee74f7703e643afcad09645ffe8d, type: 3}
+  - {fileID: 21300000, guid: 6ba4de5af07e1944fa658a1de5c56ee2, type: 3}
+  - {fileID: 21300000, guid: d5e6d6127763c7c4caaacf91ed080c0c, type: 3}
+  - {fileID: 21300000, guid: b647fc5a349c1b346a36fbb49b74409a, type: 3}

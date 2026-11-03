@@ -14,8 +14,9 @@ namespace GameplayScripts.MVC.Gameplay.Ball
     {
         #region Constants
 
-        private const float BALL_SIZE_IN_CELL = 0.8f;
-        private const float PREVIEW_SIZE_IN_CELL = 0.3f;
+        // Pixel-art sprites are drawn on a full cell-sized canvas (padding baked in), so balls and previews both fill
+        // their cell and keep the same pixel size as the board. A preview ball is half the diameter of a full one.
+        private const float PREVIEW_TO_BALL_SCALE = 0.5f;
         private const float GROW_SECONDS = 0.2f;
         private const float SELECTED_SCALE = 1.15f;
         private const float SELECTED_PULSE_SECONDS = 0.35f;
@@ -32,7 +33,9 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         // One sprite per BallColorType, in enum order starting at Red
         [SerializeField] private Sprite[] colorSprites;
+        [SerializeField] private Sprite[] previewSprites;
 
+        private BallColorType color;
         private Action despawn;
         private Tween selectedTween;
         private Tween moveTween;
@@ -61,15 +64,16 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         #region Public Methods
 
-        // A ball fills 80% of its cell, a preview (next turn's ball) 30%; both follow the cell when the board resizes
+        // Balls and previews (next turn's balls) both fill their cell and follow it when the board resizes
         public void Show(BallColorType color, RectTransform cell, bool isPreview = false)
         {
             blockedTween?.Kill();
             growTween?.Kill();
-            image.sprite = colorSprites[(int)color - 1];
+            this.color = color;
+            image.sprite = isPreview ? previewSprites[(int)color - 1] : colorSprites[(int)color - 1];
 
             transform.SetParent(cell, false);
-            SetSizeInCell(isPreview ? PREVIEW_SIZE_IN_CELL : BALL_SIZE_IN_CELL);
+            FillCell();
             transform.localScale = Vector3.one;
         }
 
@@ -77,8 +81,9 @@ namespace GameplayScripts.MVC.Gameplay.Ball
         public void GrowToFullSize()
         {
             growTween?.Kill();
-            SetSizeInCell(BALL_SIZE_IN_CELL);
-            transform.localScale = Vector3.one * (PREVIEW_SIZE_IN_CELL / BALL_SIZE_IN_CELL);
+            image.sprite = colorSprites[(int)color - 1];
+            FillCell();
+            transform.localScale = Vector3.one * PREVIEW_TO_BALL_SCALE;
             growTween = transform.DOScale(1f, GROW_SECONDS).SetEase(Ease.OutBack);
         }
 
@@ -156,12 +161,11 @@ namespace GameplayScripts.MVC.Gameplay.Ball
 
         #region Private Methods
 
-        private void SetSizeInCell(float shareOfCell)
+        private void FillCell()
         {
-            var margin = (1f - shareOfCell) / 2f;
             var ballRect = (RectTransform)transform;
-            ballRect.anchorMin = new Vector2(margin, margin);
-            ballRect.anchorMax = new Vector2(1f - margin, 1f - margin);
+            ballRect.anchorMin = Vector2.zero;
+            ballRect.anchorMax = Vector2.one;
             ballRect.offsetMin = Vector2.zero;
             ballRect.offsetMax = Vector2.zero;
         }
